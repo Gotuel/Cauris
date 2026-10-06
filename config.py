@@ -30,6 +30,8 @@ class Config:
     SECURITY_TOKEN_MAX_AGE = int(os.getenv("SECURITY_TOKEN_MAX_AGE", "3600"))
     LOGIN_MAX_ATTEMPTS = int(os.getenv("LOGIN_MAX_ATTEMPTS", "5"))
     LOGIN_LOCKOUT_MINUTES = int(os.getenv("LOGIN_LOCKOUT_MINUTES", "15"))
+    MAX_CONTENT_LENGTH = 8 * 1024 * 1024
+    UPLOAD_FOLDER = os.getenv("UPLOAD_FOLDER", str(BASE_DIR / "instance" / "uploads"))
     DEFAULT_CURRENCY = os.getenv("DEFAULT_CURRENCY", "XAF")
     DEFAULT_LOCALE = os.getenv("DEFAULT_LOCALE", "fr")
 

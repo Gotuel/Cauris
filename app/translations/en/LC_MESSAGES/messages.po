@@ -280,3 +280,453 @@ msgstr "The email address is too long."
 
 msgid "Le mot de passe doit compter entre 12 et 128 caractères."
 msgstr "The password must be between 12 and 128 characters long."
+
+msgid "Comptes"
+msgstr "Accounts"
+
+msgid "Transactions"
+msgstr "Transactions"
+
+msgid "Organisation"
+msgstr "Organization"
+
+msgid "Mes comptes"
+msgstr "My accounts"
+
+msgid "Gérez vos comptes, soldes d'ouverture et devises."
+msgstr "Manage your accounts, opening balances and currencies."
+
+msgid "Ajouter un compte"
+msgstr "Add an account"
+
+msgid "Archivé"
+msgstr "Archived"
+
+msgid "Solde actuel"
+msgstr "Current balance"
+
+msgid "Modifier"
+msgstr "Edit"
+
+msgid "Restaurer"
+msgstr "Restore"
+
+msgid "Aucun compte pour le moment"
+msgstr "No accounts yet"
+
+msgid "Ajoutez votre premier compte pour commencer à suivre votre argent."
+msgstr "Add your first account to start tracking your money."
+
+msgid "Compte"
+msgstr "Account"
+
+msgid "Modifier le compte"
+msgstr "Edit account"
+
+msgid "Nom du compte"
+msgstr "Account name"
+
+msgid "Type de compte"
+msgstr "Account type"
+
+msgid "Devise"
+msgstr "Currency"
+
+msgid "Solde initial"
+msgstr "Opening balance"
+
+msgid "Enregistrer le compte"
+msgstr "Save account"
+
+msgid "Espèces"
+msgstr "Cash"
+
+msgid "Banque"
+msgstr "Bank"
+
+msgid "Mobile money"
+msgstr "Mobile money"
+
+msgid "Épargne"
+msgstr "Savings"
+
+msgid "Carte"
+msgstr "Card"
+
+msgid "Le compte a été créé."
+msgstr "The account was created."
+
+msgid "Le compte a été mis à jour."
+msgstr "The account was updated."
+
+msgid "Le compte a été archivé."
+msgstr "The account was archived."
+
+msgid "Le compte a été restauré."
+msgstr "The account was restored."
+
+msgid "Registre financier"
+msgstr "Financial ledger"
+
+msgid "Suivez vos revenus, dépenses et virements."
+msgstr "Track your income, expenses and transfers."
+
+msgid "Gérer les catégories"
+msgstr "Manage categories"
+
+msgid "Ajouter une transaction"
+msgstr "Add a transaction"
+
+msgid "Sans catégorie"
+msgstr "Uncategorized"
+
+msgid "Compte source"
+msgstr "Source account"
+
+msgid "Compte destinataire"
+msgstr "Destination account"
+
+msgid "Montant débité"
+msgstr "Amount debited"
+
+msgid "Montant crédité"
+msgstr "Amount credited"
+
+msgid "Date"
+msgstr "Date"
+
+msgid "Enregistrer la transaction"
+msgstr "Save transaction"
+
+msgid "Enregistrer le virement"
+msgstr "Save transfer"
+
+msgid "Type"
+msgstr "Type"
+
+msgid "Montant"
+msgstr "Amount"
+
+msgid "Note"
+msgstr "Note"
+
+msgid "Tags, séparés par des virgules"
+msgstr "Tags, separated by commas"
+
+msgid "Reçu (PNG, JPEG, WebP ou PDF)"
+msgstr "Receipt (PNG, JPEG, WebP or PDF)"
+
+msgid "Ce champ ne peut dépasser %(max)d caractères."
+msgstr "This field cannot exceed %(max)d characters."
+
+msgid "Virement"
+msgstr "Transfer"
+
+msgid "Débit"
+msgstr "Debit"
+
+msgid "Crédit"
+msgstr "Credit"
+
+msgid "Revenu"
+msgstr "Income"
+
+msgid "Dépense"
+msgstr "Expense"
+
+msgid "Sans note"
+msgstr "No note"
+
+msgid "Tags"
+msgstr "Tags"
+
+msgid "Télécharger le reçu"
+msgstr "Download receipt"
+
+msgid "Supprimer"
+msgstr "Delete"
+
+msgid "Supprimer le virement"
+msgstr "Delete transfer"
+
+msgid "Effectuer un virement"
+msgstr "Make a transfer"
+
+msgid "Virement sécurisé"
+msgstr "Secure transfer"
+
+msgid "Le montant crédité est calculé au taux de change disponible et les deux écritures sont enregistrées ensemble."
+msgstr "The credited amount is calculated using the available exchange rate, and both entries are saved together."
+
+msgid "Rechercher et filtrer"
+msgstr "Search and filter"
+
+msgid "Tous"
+msgstr "All"
+
+msgid "Tous les comptes"
+msgstr "All accounts"
+
+msgid "Toutes les catégories"
+msgstr "All categories"
+
+msgid "Recherche"
+msgstr "Search"
+
+msgid "Du"
+msgstr "From"
+
+msgid "Au"
+msgstr "To"
+
+msgid "Montant minimum"
+msgstr "Minimum amount"
+
+msgid "Montant maximum"
+msgstr "Maximum amount"
+
+msgid "Texte dans note ou tags"
+msgstr "Text in note or tags"
+
+msgid "Les filtres de montant nécessitent le choix d’un compte et utilisent sa devise."
+msgstr "Amount filters require an account selection and use that account's currency."
+
+msgid "Appliquer les filtres"
+msgstr "Apply filters"
+
+msgid "Aucune transaction trouvée"
+msgstr "No transactions found"
+
+msgid "Ajoutez une transaction ou modifiez vos filtres."
+msgstr "Add a transaction or change your filters."
+
+msgid "Pagination des transactions"
+msgstr "Transaction pagination"
+
+msgid "Précédent"
+msgstr "Previous"
+
+msgid "Suivant"
+msgstr "Next"
+
+msgid "Page"
+msgstr "Page"
+
+msgid "Comptes disponibles"
+msgstr "Available accounts"
+
+msgid "Gérer"
+msgstr "Manage"
+
+msgid "Créez un compte avant d’ajouter des transactions."
+msgstr "Create an account before adding transactions."
+
+msgid "Catégories"
+msgstr "Categories"
+
+msgid "Aucune catégorie disponible."
+msgstr "No categories available."
+
+msgid "Créer une transaction"
+msgstr "Create a transaction"
+
+msgid "Modifier la transaction"
+msgstr "Edit transaction"
+
+msgid "Enregistrer"
+msgstr "Save"
+
+msgid "Annuler"
+msgstr "Cancel"
+
+msgid "Catégories et sous-catégories"
+msgstr "Categories and subcategories"
+
+msgid "Les catégories système sont partagées; vos catégories peuvent être modifiées ou archivées."
+msgstr "System categories are shared; your own categories can be edited or archived."
+
+msgid "Modifier une catégorie"
+msgstr "Edit category"
+
+msgid "Créer une catégorie"
+msgstr "Create category"
+
+msgid "Clé technique"
+msgstr "Technical key"
+
+msgid "Nom affiché"
+msgstr "Display name"
+
+msgid "Catégorie parente"
+msgstr "Parent category"
+
+msgid "Icône"
+msgstr "Icon"
+
+msgid "Couleur"
+msgstr "Color"
+
+msgid "Créer la catégorie"
+msgstr "Create category"
+
+msgid "Enregistrer les modifications"
+msgstr "Save changes"
+
+msgid "Aucune (catégorie principale)"
+msgstr "None (top-level category)"
+
+msgid "Sous-catégorie de"
+msgstr "Subcategory of"
+
+msgid "Archivée"
+msgstr "Archived"
+
+msgid "Aucune catégorie dans ce groupe."
+msgstr "No categories in this group."
+
+msgid "La catégorie a été créée."
+msgstr "The category was created."
+
+msgid "La catégorie a été mise à jour."
+msgstr "The category was updated."
+
+msgid "La catégorie a été archivée."
+msgstr "The category was archived."
+
+msgid "La catégorie a été restaurée."
+msgstr "The category was restored."
+
+msgid "Le type de reçu non autorisé."
+msgstr "This receipt file type is not allowed."
+
+msgid "Type de reçu non autorisé."
+msgstr "This receipt file type is not allowed."
+
+msgid "Le contenu du reçu ne correspond pas au type de fichier annoncé."
+msgstr "The receipt contents do not match the declared file type."
+
+msgid "La devise sélectionnée n’existe pas."
+msgstr "The selected currency does not exist."
+
+msgid "Saisissez un montant valide."
+msgstr "Enter a valid amount."
+
+msgid "Le montant doit être supérieur à zéro."
+msgstr "The amount must be greater than zero."
+
+msgid "La devise %(currency)s accepte au maximum %(digits)s décimale(s)."
+msgstr "Currency %(currency)s accepts at most %(digits)s decimal place(s)."
+
+msgid "Le montant dépasse la limite autorisée."
+msgstr "The amount exceeds the permitted limit."
+
+msgid "La devise de conversion sélectionnée n’existe pas."
+msgstr "The selected conversion currency does not exist."
+
+msgid "Aucun taux de change disponible pour %(base)s/%(quote)s. Réessayez plus tard."
+msgstr "No exchange rate is available for %(base)s/%(quote)s. Please try again later."
+
+msgid "Le service de change n’a pas fourni le taux %(base)s/%(quote)s."
+msgstr "The exchange-rate service did not provide the %(base)s/%(quote)s rate."
+
+msgid "Le service de change a fourni un taux invalide pour %(base)s/%(quote)s."
+msgstr "The exchange-rate service returned an invalid rate for %(base)s/%(quote)s."
+
+msgid "Le compte sélectionné est introuvable ou archivé."
+msgstr "The selected account was not found or is archived."
+
+msgid "La catégorie sélectionnée est invalide."
+msgstr "The selected category is invalid."
+
+msgid "Le nom du compte est obligatoire et limité à 120 caractères."
+msgstr "The account name is required and limited to 120 characters."
+
+msgid "Le type de compte sélectionné est invalide."
+msgstr "The selected account type is invalid."
+
+msgid "La devise ne peut plus être modifiée après l’ajout de transactions."
+msgstr "The currency cannot be changed after transactions have been added."
+
+msgid "La catégorie est introuvable ou ne vous appartient pas."
+msgstr "The category was not found or does not belong to you."
+
+msgid "Le nom de la catégorie est obligatoire et limité à 120 caractères."
+msgstr "The category name is required and limited to 120 characters."
+
+msgid "Le type de catégorie est invalide."
+msgstr "The category type is invalid."
+
+msgid "Une sous-catégorie doit avoir le même type que sa catégorie parente."
+msgstr "A subcategory must have the same type as its parent category."
+
+msgid "La catégorie parente est invalide."
+msgstr "The parent category is invalid."
+
+msgid "Le type ne peut pas changer après l’utilisation de cette catégorie."
+msgstr "The category type cannot be changed after the category has been used."
+
+msgid "Le type de transaction est invalide."
+msgstr "The transaction type is invalid."
+
+msgid "La transaction est introuvable."
+msgstr "The transaction was not found."
+
+msgid "Un virement ne peut pas être modifié séparément."
+msgstr "A transfer cannot be edited one entry at a time."
+
+msgid "Le virement est incomplet et ne peut pas être supprimé."
+msgstr "The transfer is incomplete and cannot be deleted."
+
+msgid "Les comptes source et destination doivent être différents."
+msgstr "The source and destination accounts must be different."
+
+msgid "Le montant du virement est trop faible après conversion."
+msgstr "The transfer amount is too small after conversion."
+
+msgid "Choisissez un compte pour filtrer par montant."
+msgstr "Choose an account to filter by amount."
+
+msgid "Le montant minimum ne peut pas être négatif."
+msgstr "The minimum amount cannot be negative."
+
+msgid "Le montant maximum ne peut pas être négatif."
+msgstr "The maximum amount cannot be negative."
+
+msgid "La date de début doit précéder la date de fin."
+msgstr "The start date must be before the end date."
+
+msgid "Le nom de la catégorie est obligatoire et limité à 120 caractères."
+msgstr "The category name is required and limited to 120 characters."
+
+msgid "Utilisez une clé de catégorie courte composée de lettres, chiffres, tirets ou tirets bas."
+msgstr "Use a short category key made of letters, numbers, hyphens or underscores."
+
+msgid "Vous avez déjà une catégorie avec cette clé."
+msgstr "You already have a category with this key."
+
+msgid "Type de reçu non autorisé."
+msgstr "This receipt file type is not allowed."
+
+msgid "La transaction a été ajoutée."
+msgstr "The transaction was added."
+
+msgid "Le virement a été enregistré."
+msgstr "The transfer was recorded."
+
+msgid "Vérifiez les champs du virement."
+msgstr "Check the transfer fields."
+
+msgid "La transaction a été mise à jour."
+msgstr "The transaction was updated."
+
+msgid "La transaction a été supprimée."
+msgstr "The transaction was deleted."
+
+msgid "Fichier trop volumineux"
+msgstr "File too large"
+
+msgid "Erreur 413"
+msgstr "Error 413"
+
+msgid "La taille maximale autorisée pour les fichiers est de 8 Mo."
+msgstr "The maximum allowed file size is 8 MB."

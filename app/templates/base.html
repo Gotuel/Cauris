@@ -21,6 +21,8 @@
           <div class="hidden items-center gap-6 md:flex">
             <a href="{{ url_for('main.index') }}" class="text-sm font-medium text-slate-600 transition hover:text-slate-900">{{ _("Accueil") }}</a>
             {% if current_user.is_authenticated %}
+              <a href="{{ url_for('accounts.list_accounts') }}" class="text-sm font-medium text-slate-600 transition hover:text-slate-900">{{ _("Comptes") }}</a>
+              <a href="{{ url_for('transactions.list_transactions') }}" class="text-sm font-medium text-slate-600 transition hover:text-slate-900">{{ _("Transactions") }}</a>
               <a href="{{ url_for('auth.profile') }}" class="text-sm font-medium text-slate-600 transition hover:text-slate-900">{{ _("Profil") }}</a>
             {% endif %}
           </div>

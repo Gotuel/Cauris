@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block title %}{{ _("Catégories") }} | Cauris{% endblock %}
+
+{% block content %}
+<section>
+  <div class="mb-8">
+    <a href="{{ url_for('transactions.list_transactions') }}" class="text-sm font-semibold text-cyan-700 hover:text-cyan-900">← {{ _("Transactions") }}</a>
+    <h1 class="mt-4 text-3xl font-black tracking-tight text-slate-900">{{ _("Catégories et sous-catégories") }}</h1>
+    <p class="mt-2 text-slate-600">{{ _("Les catégories système sont partagées; vos catégories peuvent être modifiées ou archivées.") }}</p>
+  </div>
+  <div class="grid gap-6 lg:grid-cols-[minmax(18rem,0.75fr)_minmax(0,1.25fr)]">
+    <form method="post" action="{{ url_for('transactions.edit_category', category_id=edit_category.id) if edit_category else url_for('transactions.categories') }}" class="h-fit rounded-2xl border border-slate-200 bg-white p-5 shadow-sm" novalidate>
+      {{ form.hidden_tag() }}
+      <h2 class="mb-5 text-lg font-bold text-slate-900">{{ _("Modifier une catégorie") if edit_category else _("Créer une catégorie") }}</h2>
+      {% if not edit_category %}
+        <div class="mb-4">
+          {{ form.key.label(class="mb-2 block text-sm font-semibold text-slate-700") }}
+          {{ form.key(class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3", placeholder="ex. courses") }}
+          {% for error in form.key.errors %}<p class="mt-1 text-sm text-rose-700">{{ error }}</p>{% endfor %}
+        </div>
+      {% else %}
+        {{ form.key(type="hidden") }}
+      {% endif %}
+      {% for field in [form.custom_name, form.type, form.parent_id, form.icon, form.color] %}
+        <div class="mb-4">
+          {{ field.label(class="mb-2 block text-sm font-semibold text-slate-700") }}
+          {{ field(class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3", type="color" if field.name == "color" else None) }}
+          {% for error in field.errors %}<p class="mt-1 text-sm text-rose-700">{{ error }}</p>{% endfor %}
+        </div>
+      {% endfor %}
+      <button type="submit" class="w-full rounded-xl bg-slate-900 px-5 py-3 font-semibold text-white">{{ form.submit.label.text if not edit_category else _("Enregistrer les modifications") }}</button>
+      {% if edit_category %}<a href="{{ url_for('transactions.categories') }}" class="mt-3 block text-center text-sm font-semibold text-slate-600">{{ _("Annuler") }}</a>{% endif %}
+    </form>
+
+    <div class="space-y-6">
+      {% for category_type, label in [("expense", _("Dépenses")), ("income", _("Revenus"))] %}
+        <section class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <h2 class="mb-4 text-lg font-bold text-slate-900">{{ label }}</h2>
+          <div class="space-y-3">
+            {% for category in categories if category.type == category_type %}
+              <article class="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-slate-100 p-3 {% if category.is_archived %}opacity-60{% endif %}">
+                <div class="flex items-center gap-3">
+                  <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-100 text-lg">{{ category.icon or "•" }}</span>
+                  <div>
+                    <p class="font-semibold text-slate-800">{{ category_display_name(category) }}</p>
+                    {% if category.parent %}<p class="text-xs text-slate-500">{{ _("Sous-catégorie de") }} {{ category_display_name(category.parent) }}</p>{% endif %}
+                    {% if category.is_archived %}<span class="text-xs text-slate-500">{{ _("Archivée") }}</span>{% endif %}
+                  </div>
+                </div>
+                {% if category.user_id == current_user.id %}
+                  <div class="flex gap-2">
+                    <a href="{{ url_for('transactions.edit_category', category_id=category.id) }}" class="rounded-lg border border-slate-200 px-3 py-2 text-xs font-semibold text-slate-700">{{ _("Modifier") }}</a>
+                    {% if category.is_archived %}
+                      <form method="post" action="{{ url_for('transactions.restore_category', category_id=category.id) }}">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                        <button class="rounded-lg border border-emerald-200 px-3 py-2 text-xs font-semibold text-emerald-800">{{ _("Restaurer") }}</button>
+                      </form>
+                    {% else %}
+                      <form method="post" action="{{ url_for('transactions.archive_category', category_id=category.id) }}">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                        <button class="rounded-lg border border-slate-200 px-3 py-2 text-xs font-semibold text-slate-600">{{ _("Archiver") }}</button>
+                      </form>
+                    {% endif %}
+                  </div>
+                {% endif %}
+              </article>
+            {% else %}
+              <p class="text-sm text-slate-500">{{ _("Aucune catégorie dans ce groupe.") }}</p>
+            {% endfor %}
+          </div>
+        </section>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

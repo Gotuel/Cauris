@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}{{ _("Compte") }} | Cauris{% endblock %}
+
+{% block content %}
+<section class="mx-auto max-w-2xl">
+  <div class="mb-7">
+    <a href="{{ url_for('accounts.list_accounts') }}" class="text-sm font-semibold text-cyan-700 hover:text-cyan-900">← {{ _("Mes comptes") }}</a>
+    <h1 class="mt-4 text-3xl font-black tracking-tight text-slate-900">{{ _("Modifier le compte") if account else _("Ajouter un compte") }}</h1>
+  </div>
+  <form method="post" class="rounded-3xl border border-slate-200 bg-white p-6 shadow-soft sm:p-8" novalidate>
+    {{ form.hidden_tag() }}
+    {% for field in [form.name, form.type, form.currency_code, form.initial_balance] %}
+      <div class="mb-5">
+        {{ field.label(class="mb-2 block text-sm font-semibold text-slate-700") }}
+        {{ field(class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-cyan-500 focus:ring-2 focus:ring-cyan-100", inputmode="decimal" if field.name == "initial_balance" else None) }}
+        {% for error in field.errors %}<p class="mt-1 text-sm text-rose-700">{{ error }}</p>{% endfor %}
+      </div>
+    {% endfor %}
+    <button type="submit" class="w-full rounded-xl bg-slate-900 px-5 py-3 font-semibold text-white transition hover:bg-slate-700">{{ form.submit.label.text }}</button>
+  </form>
+</section>
+{% endblock %}

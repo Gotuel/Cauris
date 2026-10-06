@@ -1,0 +1,166 @@
+{% extends "base.html" %}
+
+{% block title %}{{ _("Transactions") }} | Cauris{% endblock %}
+
+{% block content %}
+<section>
+  <div class="mb-8 flex flex-wrap items-end justify-between gap-4">
+    <div>
+      <p class="text-sm font-semibold uppercase tracking-[0.18em] text-cyan-700">{{ _("Registre financier") }}</p>
+      <h1 class="mt-2 text-3xl font-black tracking-tight text-slate-900">{{ _("Transactions") }}</h1>
+      <p class="mt-2 text-slate-600">{{ _("Suivez vos revenus, dépenses et virements.") }}</p>
+    </div>
+    <a href="{{ url_for('transactions.categories') }}" class="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700 hover:border-cyan-500 hover:text-cyan-800">{{ _("Gérer les catégories") }}</a>
+  </div>
+
+  <div class="grid gap-6 xl:grid-cols-[minmax(0,1.25fr)_minmax(18rem,0.75fr)]">
+    <div class="space-y-6">
+      <details class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm" open>
+        <summary class="cursor-pointer list-none text-lg font-bold text-slate-900">{{ _("Ajouter une transaction") }}</summary>
+        <form method="post" enctype="multipart/form-data" action="{{ url_for('transactions.new_transaction') }}"
+              hx-post="{{ url_for('transactions.new_transaction') }}" hx-encoding="multipart/form-data" hx-target="#transaction-list"
+              hx-swap="afterbegin" hx-on::after-request="if(event.detail.successful) this.reset()"
+              class="mt-5 grid gap-4 sm:grid-cols-2">
+          {{ transaction_form.hidden_tag() }}
+          <div>
+            {{ transaction_form.type.label(class="mb-2 block text-sm font-semibold text-slate-700") }}
+            {{ transaction_form.type(class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3", **{"hx-get": url_for("transactions.category_options"), "hx-trigger": "change", "hx-include": "this", "hx-target": "#category-field", "hx-swap": "innerHTML"}) }}
+          </div>
+          <div>
+            {{ transaction_form.account_id.label(class="mb-2 block text-sm font-semibold text-slate-700") }}
+            {{ transaction_form.account_id(class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3") }}
+          </div>
+          <div>
+            {{ transaction_form.amount.label(class="mb-2 block text-sm font-semibold text-slate-700") }}
+            {{ transaction_form.amount(class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3", inputmode="decimal", placeholder="0") }}
+          </div>
+          <div id="category-field">
+            {{ transaction_form.category_id.label(class="mb-2 block text-sm font-semibold text-slate-700") }}
+            {{ transaction_form.category_id(class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3") }}
+          </div>
+          <div>
+            {{ transaction_form.occurred_on.label(class="mb-2 block text-sm font-semibold text-slate-700") }}
+            {{ transaction_form.occurred_on(class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3") }}
+          </div>
+          <div>
+            {{ transaction_form.attachment.label(class="mb-2 block text-sm font-semibold text-slate-700") }}
+            {{ transaction_form.attachment(class="w-full rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm") }}
+          </div>
+          <div class="sm:col-span-2">
+            {{ transaction_form.note.label(class="mb-2 block text-sm font-semibold text-slate-700") }}
+            {{ transaction_form.note(class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3", placeholder=_("Ex. Courses, salaire…")) }}
+          </div>
+          <div>
+            {{ transaction_form.tags.label(class="mb-2 block text-sm font-semibold text-slate-700") }}
+            {{ transaction_form.tags(class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3") }}
+          </div>
+          <div class="flex items-end">
+            <button type="submit" class="w-full rounded-xl bg-slate-900 px-5 py-3 font-semibold text-white transition hover:bg-slate-700">{{ _("Ajouter") }}</button>
+          </div>
+          <div id="transaction-feedback" class="sm:col-span-2" role="alert"></div>
+        </form>
+      </details>
+
+      <details class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+        <summary class="cursor-pointer list-none text-lg font-bold text-slate-900">{{ _("Effectuer un virement") }}</summary>
+        <form method="post" action="{{ url_for('transactions.transfer') }}"
+              hx-post="{{ url_for('transactions.transfer') }}" hx-target="#transaction-list"
+              hx-swap="afterbegin" hx-on::after-request="if(event.detail.successful) this.reset()"
+              class="mt-5 grid gap-4 sm:grid-cols-2">
+          {{ transfer_form.hidden_tag() }}
+          <div>
+            {{ transfer_form.source_account_id.label(class="mb-2 block text-sm font-semibold text-slate-700") }}
+            {{ transfer_form.source_account_id(class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3") }}
+          </div>
+          <div>
+            {{ transfer_form.destination_account_id.label(class="mb-2 block text-sm font-semibold text-slate-700") }}
+            {{ transfer_form.destination_account_id(class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3") }}
+          </div>
+          <div>
+            {{ transfer_form.source_amount.label(class="mb-2 block text-sm font-semibold text-slate-700") }}
+            {{ transfer_form.source_amount(class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3", inputmode="decimal", placeholder="0") }}
+          </div>
+          <div>
+            {{ transfer_form.occurred_on.label(class="mb-2 block text-sm font-semibold text-slate-700") }}
+            {{ transfer_form.occurred_on(class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3") }}
+          </div>
+          <div class="sm:col-span-2">
+            {{ transfer_form.note.label(class="mb-2 block text-sm font-semibold text-slate-700") }}
+            {{ transfer_form.note(class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3") }}
+          </div>
+          <div>
+            {{ transfer_form.tags.label(class="mb-2 block text-sm font-semibold text-slate-700") }}
+            {{ transfer_form.tags(class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3") }}
+          </div>
+          <div class="flex items-end">
+            <button type="submit" class="w-full rounded-xl bg-indigo-700 px-5 py-3 font-semibold text-white transition hover:bg-indigo-800">{{ _("Virement sécurisé") }}</button>
+          </div>
+          <p class="sm:col-span-2 text-sm text-slate-500">{{ _("Le montant crédité est calculé au taux de change disponible et les deux écritures sont enregistrées ensemble.") }}</p>
+          <div id="transfer-feedback" class="sm:col-span-2" role="alert"></div>
+        </form>
+      </details>
+
+      <form method="get" class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+        <h2 class="mb-4 text-lg font-bold text-slate-900">{{ _("Rechercher et filtrer") }}</h2>
+        <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {% for field in [filter_form.search, filter_form.account_id, filter_form.type, filter_form.category_id, filter_form.date_from, filter_form.date_to, filter_form.min_amount, filter_form.max_amount] %}
+            <div>
+              {{ field.label(class="mb-1.5 block text-xs font-semibold text-slate-600") }}
+              {{ field(class="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm", placeholder=_("Texte dans note ou tags") if field.name == "search" else None, inputmode="decimal" if field.name in ["min_amount", "max_amount"] else None) }}
+            </div>
+          {% endfor %}
+        </div>
+        <p class="mt-2 text-xs text-slate-500">{{ _("Les filtres de montant nécessitent le choix d’un compte et utilisent sa devise.") }}</p>
+        {% if error %}<p class="mt-3 text-sm text-rose-700" role="alert">{{ error }}</p>{% endif %}
+        <button type="submit" class="mt-4 rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white">{{ _("Appliquer les filtres") }}</button>
+      </form>
+
+      <div id="transaction-list" class="space-y-3" aria-live="polite">
+        {% for transaction in page.items %}
+          {% set amount = balances[transaction.id] %}
+          {% set category_name = category_display_name(transaction.category) if transaction.category else None %}
+          {% include "transactions/_item.html" %}
+        {% else %}
+          <div class="rounded-2xl border border-dashed border-slate-300 bg-white p-8 text-center">
+            <h2 class="text-lg font-bold text-slate-900">{{ _("Aucune transaction trouvée") }}</h2>
+            <p class="mt-2 text-slate-600">{{ _("Ajoutez une transaction ou modifiez vos filtres.") }}</p>
+          </div>
+        {% endfor %}
+      </div>
+      {% if page.pages > 1 %}
+        <nav class="flex items-center justify-between rounded-xl border border-slate-200 bg-white p-4" aria-label="{{ _('Pagination des transactions') }}">
+          {% if page.has_prev %}<a class="font-semibold text-cyan-700" href="{{ url_for('transactions.list_transactions', page=page.prev_num, **filter_args) }}">← {{ _("Précédent") }}</a>{% else %}<span class="text-slate-400">{{ _("Précédent") }}</span>{% endif %}
+          <span class="text-sm text-slate-600">{{ _("Page") }} {{ page.page }} / {{ page.pages }}</span>
+          {% if page.has_next %}<a class="font-semibold text-cyan-700" href="{{ url_for('transactions.list_transactions', page=page.next_num, **filter_args) }}">{{ _("Suivant") }} →</a>{% else %}<span class="text-slate-400">{{ _("Suivant") }}</span>{% endif %}
+        </nav>
+      {% endif %}
+    </div>
+
+    <aside class="space-y-4">
+      <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+        <h2 class="text-lg font-bold text-slate-900">{{ _("Comptes disponibles") }}</h2>
+        <div class="mt-4 space-y-3">
+          {% for account in accounts if not account.is_archived %}
+            <div class="flex items-center justify-between gap-3 border-b border-slate-100 pb-3 last:border-0">
+              <div><p class="font-semibold text-slate-800">{{ account.name }}</p><p class="text-xs text-slate-500">{{ account.currency_code }}</p></div>
+              <a href="{{ url_for('accounts.list_accounts') }}" class="text-xs font-semibold text-cyan-700">{{ _("Gérer") }}</a>
+            </div>
+          {% else %}
+            <p class="text-sm text-slate-500">{{ _("Créez un compte avant d’ajouter des transactions.") }}</p>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+        <h2 class="text-lg font-bold text-slate-900">{{ _("Catégories") }}</h2>
+        <div class="mt-4 flex flex-wrap gap-2">
+          {% for category in categories[:8] %}
+            <span class="rounded-full bg-slate-100 px-3 py-1.5 text-xs font-medium text-slate-700">{{ category_display_name(category) }}</span>
+          {% else %}
+            <p class="text-sm text-slate-500">{{ _("Aucune catégorie disponible.") }}</p>
+          {% endfor %}
+        </div>
+      </div>
+    </aside>
+  </div>
+</section>
+{% endblock %}

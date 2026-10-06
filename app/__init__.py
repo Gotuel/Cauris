@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, current_app, render_template, request, session
+from flask import Flask, current_app, has_request_context, render_template, request, session
 from flask_login import current_user
 from flask_babel import get_locale, gettext, ngettext
 
@@ -9,7 +9,9 @@ from .extensions import babel, csrf, db, login_manager, mail, migrate, scheduler
 
 
 def select_locale() -> str:
-    if current_user.is_authenticated:
+    if not has_request_context():
+        return current_app.config["DEFAULT_LOCALE"]
+    if current_user is not None and current_user.is_authenticated:
         return current_user.locale
     return (
         session.get("locale")
@@ -63,8 +65,15 @@ def _seed_initial_data() -> None:
     ]
 
     for code, name, symbol, minor_unit in default_currencies:
-        if not Currency.query.filter_by(code=code).first():
-            db.session.add(Currency(code=code, name=name, symbol=symbol, minor_unit=minor_unit))
+        exists = db.session.scalar(
+            db.select(Currency.code).where(Currency.code == code)
+        )
+        if not exists:
+            db.session.execute(
+                db.insert(Currency).values(
+                    code=code, name=name, symbol=symbol, minor_unit=minor_unit
+                )
+            )
 
     system_categories = [
         ("food", "expense", "Alimentation", "🍲", "#f59e0b"),
@@ -78,9 +87,14 @@ def _seed_initial_data() -> None:
     ]
 
     for key, category_type, fallback_name, icon, color in system_categories:
-        if not Category.query.filter_by(key=key, user_id=None).first():
-            db.session.add(
-                Category(
+        exists = db.session.scalar(
+            db.select(Category.id).where(
+                Category.key == key, Category.user_id.is_(None)
+            )
+        )
+        if not exists:
+            db.session.execute(
+                db.insert(Category).values(
                     user_id=None,
                     key=key,
                     custom_name=fallback_name,
@@ -124,6 +138,10 @@ def create_app(config_name: str | None = None) -> Flask:
     @app.errorhandler(500)
     def server_error(error):
         return render_template("errors/500.html"), 500
+
+    @app.errorhandler(413)
+    def upload_too_large(error):
+        return render_template("errors/413.html"), 413
 
     with app.app_context():
         db.create_all()

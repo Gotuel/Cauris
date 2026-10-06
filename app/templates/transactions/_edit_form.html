@@ -1,0 +1,48 @@
+<article id="transaction-{{ transaction.id }}" class="rounded-2xl border border-cyan-200 bg-white p-5 shadow-sm">
+  <form method="post" enctype="multipart/form-data"
+        action="{{ url_for('transactions.edit_transaction', transaction_id=transaction.id) }}"
+        hx-post="{{ url_for('transactions.edit_transaction', transaction_id=transaction.id) }}"
+        hx-encoding="multipart/form-data" hx-target="#transaction-{{ transaction.id }}" hx-swap="outerHTML"
+        class="grid gap-4 sm:grid-cols-2">
+    {{ form.hidden_tag() }}
+    {% for field in [form.account_id, form.type, form.amount, form.category_id, form.occurred_on, form.attachment, form.note, form.tags] %}
+      {% for error in field.errors %}<p class="text-sm text-rose-700 sm:col-span-2" role="alert">{{ error }}</p>{% endfor %}
+    {% endfor %}
+    <div>
+      {{ form.type.label(class="mb-2 block text-sm font-semibold text-slate-700") }}
+      {{ form.type(class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3", **{"hx-get": url_for("transactions.category_options"), "hx-trigger": "change", "hx-include": "this", "hx-target": "#edit-category-field-" ~ transaction.id, "hx-swap": "innerHTML"}) }}
+    </div>
+    <div>
+      {{ form.account_id.label(class="mb-2 block text-sm font-semibold text-slate-700") }}
+      {{ form.account_id(class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3") }}
+    </div>
+    <div>
+      {{ form.amount.label(class="mb-2 block text-sm font-semibold text-slate-700") }}
+      {{ form.amount(class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3", inputmode="decimal") }}
+    </div>
+    <div id="edit-category-field-{{ transaction.id }}">
+      {{ form.category_id.label(class="mb-2 block text-sm font-semibold text-slate-700") }}
+      {{ form.category_id(class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3") }}
+    </div>
+    <div>
+      {{ form.occurred_on.label(class="mb-2 block text-sm font-semibold text-slate-700") }}
+      {{ form.occurred_on(class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3") }}
+    </div>
+    <div>
+      {{ form.attachment.label(class="mb-2 block text-sm font-semibold text-slate-700") }}
+      {{ form.attachment(class="w-full rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm") }}
+    </div>
+    <div>
+      {{ form.note.label(class="mb-2 block text-sm font-semibold text-slate-700") }}
+      {{ form.note(class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3") }}
+    </div>
+    <div>
+      {{ form.tags.label(class="mb-2 block text-sm font-semibold text-slate-700") }}
+      {{ form.tags(class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3") }}
+    </div>
+    <div class="flex gap-2 sm:col-span-2">
+      <button type="submit" class="rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white">{{ _("Enregistrer") }}</button>
+      <a href="{{ url_for('transactions.list_transactions') }}" class="rounded-lg border border-slate-200 px-4 py-2.5 text-sm font-semibold text-slate-700">{{ _("Annuler") }}</a>
+    </div>
+  </form>
+</article>

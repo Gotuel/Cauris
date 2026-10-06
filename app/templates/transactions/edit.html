@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}{{ _("Modifier la transaction") }} | Cauris{% endblock %}
+
+{% block content %}
+<section class="mx-auto max-w-2xl">
+  <div class="mb-7">
+    <a href="{{ url_for('transactions.list_transactions') }}" class="text-sm font-semibold text-cyan-700 hover:text-cyan-900">← {{ _("Transactions") }}</a>
+    <h1 class="mt-4 text-3xl font-black tracking-tight text-slate-900">{{ _("Modifier la transaction") }}</h1>
+  </div>
+  {% include "transactions/_edit_form.html" %}
+</section>
+{% endblock %}

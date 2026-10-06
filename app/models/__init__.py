@@ -83,6 +83,9 @@ class Account(db.Model):
 
 class Category(db.Model):
     __tablename__ = "categories"
+    __table_args__ = (
+        db.UniqueConstraint("user_id", "key", name="uq_category_user_key"),
+    )
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=True)
@@ -92,12 +95,11 @@ class Category(db.Model):
     parent_id = db.Column(db.Integer, db.ForeignKey("categories.id"), nullable=True)
     icon = db.Column(db.String(50), nullable=True)
     color = db.Column(db.String(20), nullable=True)
+    is_archived = db.Column(db.Boolean, nullable=False, default=False, server_default="0")
 
     user = db.relationship("User", back_populates="categories")
     parent = db.relationship("Category", remote_side="Category.id", backref="children")
-    transactions = db.relationship(
-        "Transaction", back_populates="category", cascade="all, delete-orphan"
-    )
+    transactions = db.relationship("Transaction", back_populates="category")
     budgets = db.relationship("Budget", back_populates="category")
 
 
@@ -125,7 +127,16 @@ class Transaction(db.Model):
     category_id = db.Column(db.Integer, db.ForeignKey("categories.id"), nullable=True)
     type = db.Column(db.String(30), nullable=False)
     amount = db.Column(db.Integer, nullable=False)
-    currency_code = db.Column(db.String(10), nullable=False)
+    currency_code = db.Column(
+        db.String(10),
+        db.ForeignKey("currencies.code", name="fk_transaction_currency"),
+        nullable=False,
+    )
+    base_currency_code = db.Column(
+        db.String(10),
+        db.ForeignKey("currencies.code", name="fk_transaction_base_currency"),
+        nullable=False,
+    )
     fx_rate_to_base = db.Column(db.Numeric(20, 10), nullable=False)
     amount_in_base = db.Column(db.Integer, nullable=False)
     date = db.Column(db.DateTime, nullable=False, default=_utcnow_naive)

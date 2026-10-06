@@ -54,8 +54,11 @@ L'application est alors accessible sur http://127.0.0.1:5000.
 
 - **Étape 1** : structure Flask factory + blueprints, configuration, modèles, données initiales, migrations et base du design system.
 - **Étape 2** : inscription avec confirmation d’adresse e-mail, connexion/déconnexion, limite de tentatives, réinitialisation par lien signé et expirant, profil (langue, devise, thème), changement de mot de passe et suppression confirmée du compte.
+- **Étape 3** : gestion des comptes et soldes, catégories/sous-catégories, transactions filtrables/paginées avec reçus, et virements atomiques y compris entre devises.
 
 Les mots de passe sont hachés avec Argon2. Les comptes non confirmés ne peuvent pas se connecter. Les erreurs d’envoi de courrier sont journalisées côté serveur et affichées clairement à l’utilisateur; le compte créé reste disponible pour une nouvelle tentative d’envoi à la connexion.
+
+Les montants saisis sont convertis en unités mineures entières selon la devise. Les taux utilisent la parité fixe XAF/XOF–EUR, sinon `open.er-api.com`; les taux quotidiens sont enregistrés, et le dernier taux stocké est utilisé si le fournisseur est inaccessible. Chaque transaction conserve son taux et la devise de base qui servait à son enregistrement, afin que les préférences monétaires modifiées plus tard ne réécrivent pas l’historique. Les reçus sont limités à 8 Mo et aux formats PDF, JPEG, PNG et WebP; ils ne sont servis qu’à leur propriétaire.
 
 ## Configuration des e-mails et sécurité
 

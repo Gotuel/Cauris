@@ -1,0 +1,10 @@
+<div class="contents">
+  {% set transaction = outgoing %}
+  {% set amount = outgoing_amount %}
+  {% set category_name = None %}
+  {% include "transactions/_item.html" %}
+  {% set transaction = incoming %}
+  {% set amount = incoming_amount %}
+  {% set category_name = None %}
+  {% include "transactions/_item.html" %}
+</div>
