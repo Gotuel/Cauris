@@ -54,3 +54,83 @@ a { text-decoration: none; }
     scroll-behavior: auto !important;
   }
 }
+
+html[data-theme="dark"],
+html.dark {
+  color-scheme: dark;
+  --cauris-bg: #0f172a;
+  --cauris-surface: #1e293b;
+  --cauris-text: #e2e8f0;
+  --cauris-border: #334155;
+}
+
+html[data-theme="dark"] body,
+html.dark body {
+  background: var(--cauris-bg);
+  color: var(--cauris-text);
+}
+
+html[data-theme="dark"] .bg-white,
+html.dark .bg-white {
+  background-color: var(--cauris-surface);
+}
+
+html[data-theme="dark"] .bg-slate-100,
+html.dark .bg-slate-100 {
+  background-color: #0f172a;
+}
+
+html[data-theme="dark"] .bg-slate-50,
+html.dark .bg-slate-50 {
+  background-color: #172033;
+}
+
+html[data-theme="dark"] .text-slate-900,
+html.dark .text-slate-900 {
+  color: #f1f5f9;
+}
+
+html[data-theme="dark"] .text-slate-800,
+html.dark .text-slate-800,
+html[data-theme="dark"] .text-slate-700,
+html.dark .text-slate-700,
+html[data-theme="dark"] .text-slate-600,
+html.dark .text-slate-600 {
+  color: #cbd5e1;
+}
+
+html[data-theme="dark"] .border-slate-200,
+html.dark .border-slate-200,
+html[data-theme="dark"] .border-slate-300,
+html.dark .border-slate-300 {
+  border-color: #334155;
+}
+
+html[data-theme="system"] body {
+  background: var(--cauris-bg);
+}
+
+@media (prefers-color-scheme: dark) {
+  html[data-theme="system"] {
+    color-scheme: dark;
+    --cauris-bg: #0f172a;
+    --cauris-surface: #1e293b;
+    --cauris-text: #e2e8f0;
+    --cauris-border: #334155;
+  }
+
+  html[data-theme="system"] body {
+    background: var(--cauris-bg);
+    color: var(--cauris-text);
+  }
+
+  html[data-theme="system"] .bg-white { background-color: var(--cauris-surface); }
+  html[data-theme="system"] .bg-slate-100 { background-color: #0f172a; }
+  html[data-theme="system"] .bg-slate-50 { background-color: #172033; }
+  html[data-theme="system"] .text-slate-900 { color: #f1f5f9; }
+  html[data-theme="system"] .text-slate-800,
+  html[data-theme="system"] .text-slate-700,
+  html[data-theme="system"] .text-slate-600 { color: #cbd5e1; }
+  html[data-theme="system"] .border-slate-200,
+  html[data-theme="system"] .border-slate-300 { border-color: #334155; }
+}

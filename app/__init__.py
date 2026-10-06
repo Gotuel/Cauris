@@ -1,9 +1,21 @@
 import os
 
-from flask import Flask, render_template
+from flask import Flask, current_app, render_template, request, session
+from flask_login import current_user
+from flask_babel import get_locale, gettext, ngettext
 
 from config import config_by_name
 from .extensions import babel, csrf, db, login_manager, mail, migrate, scheduler
+
+
+def select_locale() -> str:
+    if current_user.is_authenticated:
+        return current_user.locale
+    return (
+        session.get("locale")
+        or request.accept_languages.best_match(current_app.config["LANGUAGES"])
+        or current_app.config["DEFAULT_LOCALE"]
+    )
 
 
 def _register_blueprints(app: Flask) -> None:
@@ -85,16 +97,16 @@ def create_app(config_name: str | None = None) -> Flask:
     app = Flask(__name__)
     config_name = config_name or os.getenv("FLASK_ENV", "development")
     app.config.from_object(config_by_name[config_name])
+    if config_name == "production" and not app.config.get("SECRET_KEY"):
+        raise RuntimeError("Set SECRET_KEY in the production environment before starting Cauris.")
 
     db.init_app(app)
     migrate.init_app(app, db)
     login_manager.init_app(app)
-    babel.init_app(app)
-    app.jinja_env.globals.update({
-        "get_locale": lambda: app.config.get("BABEL_DEFAULT_LOCALE", "fr"),
-        "gettext": lambda value: value,
-        "ngettext": lambda singular, plural, n: singular if n == 1 else plural,
-    })
+    babel.init_app(app, locale_selector=select_locale)
+    app.jinja_env.globals.update(
+        {"get_locale": get_locale, "gettext": gettext, "ngettext": ngettext, "_": gettext}
+    )
     mail.init_app(app)
     csrf.init_app(app)
     if not scheduler.running:

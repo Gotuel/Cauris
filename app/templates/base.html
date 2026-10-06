@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ get_locale() }}" class="h-full bg-slate-100 text-slate-900">
+<html lang="{{ get_locale() }}" data-theme="{{ current_user.theme if current_user.is_authenticated else 'system' }}" class="{% if current_user.is_authenticated and current_user.theme == 'dark' %}dark{% endif %} h-full bg-slate-100 text-slate-900">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,18 +19,38 @@
             <span class="text-xl font-semibold tracking-tight text-slate-900">Cauris</span>
           </a>
           <div class="hidden items-center gap-6 md:flex">
-            <a href="#" class="text-sm font-medium text-slate-600 transition hover:text-slate-900">Accueil</a>
-            <a href="#" class="text-sm font-medium text-slate-600 transition hover:text-slate-900">Comptes</a>
-            <a href="#" class="text-sm font-medium text-slate-600 transition hover:text-slate-900">Transactions</a>
-            <a href="#" class="text-sm font-medium text-slate-600 transition hover:text-slate-900">Budgets</a>
+            <a href="{{ url_for('main.index') }}" class="text-sm font-medium text-slate-600 transition hover:text-slate-900">{{ _("Accueil") }}</a>
+            {% if current_user.is_authenticated %}
+              <a href="{{ url_for('auth.profile') }}" class="text-sm font-medium text-slate-600 transition hover:text-slate-900">{{ _("Profil") }}</a>
+            {% endif %}
           </div>
-          <button class="rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-sm font-medium text-slate-700 shadow-sm transition hover:border-cyan-500 hover:text-cyan-700">
-            Connexion
-          </button>
+          {% if current_user.is_authenticated %}
+            <div class="flex items-center gap-3">
+              <span class="hidden text-sm text-slate-600 sm:inline">{{ current_user.username }}</span>
+              <form method="post" action="{{ url_for('auth.logout') }}">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <button class="rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-sm font-medium text-slate-700 shadow-sm transition hover:border-cyan-500 hover:text-cyan-700">{{ _("Déconnexion") }}</button>
+              </form>
+            </div>
+          {% else %}
+            <div class="flex items-center gap-2">
+              <a href="{{ url_for('auth.login') }}" class="rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-sm font-medium text-slate-700 shadow-sm transition hover:border-cyan-500 hover:text-cyan-700">{{ _("Connexion") }}</a>
+              <a href="{{ url_for('auth.register') }}" class="rounded-full bg-slate-900 px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-slate-700">{{ _("Créer un compte") }}</a>
+            </div>
+          {% endif %}
         </nav>
       </header>
 
       <main class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <div class="mb-6 space-y-3" role="status" aria-live="polite">
+              {% for category, message in messages %}
+                <div class="rounded-xl border px-4 py-3 text-sm {% if category == 'error' %}border-rose-200 bg-rose-50 text-rose-800{% elif category == 'success' %}border-emerald-200 bg-emerald-50 text-emerald-800{% else %}border-cyan-200 bg-cyan-50 text-cyan-900{% endif %}">{{ message }}</div>
+              {% endfor %}
+            </div>
+          {% endif %}
+        {% endwith %}
         {% block content %}{% endblock %}
       </main>
     </div>

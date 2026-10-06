@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 
-{% block title %}Page introuvable{% endblock %}
+{% block title %}{{ _("Page introuvable") }}{% endblock %}
 
 {% block content %}
 <section class="px-4 py-24 text-center">
-  <p class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">Erreur 404</p>
-  <h1 class="mt-4 text-4xl font-black text-slate-900">Cette page n'existe pas.</h1>
-  <p class="mt-4 text-slate-600">La ressource demandée ne fait pas partie de Cauris.</p>
+  <p class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">{{ _("Erreur 404") }}</p>
+  <h1 class="mt-4 text-4xl font-black text-slate-900">{{ _("Cette page n'existe pas.") }}</h1>
+  <p class="mt-4 text-slate-600">{{ _("La ressource demandée ne fait pas partie de Cauris.") }}</p>
 </section>
 {% endblock %}

@@ -1,0 +1,282 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Cauris 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en\n"
+
+msgid "Accueil"
+msgstr "Home"
+
+msgid "Profil"
+msgstr "Profile"
+
+msgid "Déconnexion"
+msgstr "Log out"
+
+msgid "Connexion"
+msgstr "Log in"
+
+msgid "Créer un compte"
+msgstr "Create an account"
+
+msgid "Bienvenue sur Cauris"
+msgstr "Welcome to Cauris"
+
+msgid "Vos finances, dans votre langue et votre devise."
+msgstr "Your finances, in your language and currency."
+
+msgid "Vous avez déjà un compte ?"
+msgstr "Already have an account?"
+
+msgid "Se connecter"
+msgstr "Log in"
+
+msgid "Content de vous revoir"
+msgstr "Welcome back"
+
+msgid "Connectez-vous pour retrouver vos finances."
+msgstr "Log in to access your finances."
+
+msgid "Mot de passe oublié ?"
+msgstr "Forgot your password?"
+
+msgid "Pas encore de compte ?"
+msgstr "Don't have an account yet?"
+
+msgid "Réinitialiser le mot de passe"
+msgstr "Reset password"
+
+msgid "Indiquez l’adresse e-mail de votre compte pour recevoir un lien sécurisé."
+msgstr "Enter your account email address to receive a secure link."
+
+msgid "Envoyer le lien"
+msgstr "Send link"
+
+msgid "Choisir un nouveau mot de passe"
+msgstr "Choose a new password"
+
+msgid "Mon profil"
+msgstr "My profile"
+
+msgid "Compte"
+msgstr "Account"
+
+msgid "Préférences du profil"
+msgstr "Profile preferences"
+
+msgid "Enregistrer les préférences"
+msgstr "Save preferences"
+
+msgid "Changer le mot de passe"
+msgstr "Change password"
+
+msgid "Supprimer mon compte"
+msgstr "Delete my account"
+
+msgid "Action irréversible"
+msgstr "This action cannot be undone"
+
+msgid "La suppression effacera définitivement votre profil et toutes les données personnelles associées."
+msgstr "Deleting your account permanently removes your profile and all associated personal data."
+
+msgid "Supprimer définitivement mon compte"
+msgstr "Permanently delete my account"
+
+msgid "Nom d’utilisateur"
+msgstr "Username"
+
+msgid "Adresse e-mail"
+msgstr "Email address"
+
+msgid "Mot de passe"
+msgstr "Password"
+
+msgid "Confirmer le mot de passe"
+msgstr "Confirm password"
+
+msgid "Nouveau mot de passe"
+msgstr "New password"
+
+msgid "Confirmer le nouveau mot de passe"
+msgstr "Confirm new password"
+
+msgid "Mot de passe actuel"
+msgstr "Current password"
+
+msgid "Langue"
+msgstr "Language"
+
+msgid "Devise principale"
+msgstr "Primary currency"
+
+msgid "Thème"
+msgstr "Theme"
+
+msgid "Rester connecté"
+msgstr "Remember me"
+
+msgid "Français"
+msgstr "French"
+
+msgid "English"
+msgstr "English"
+
+msgid "Clair"
+msgstr "Light"
+
+msgid "Sombre"
+msgstr "Dark"
+
+msgid "Système"
+msgstr "System"
+
+msgid "Les mots de passe ne correspondent pas."
+msgstr "The passwords do not match."
+
+msgid "Cette adresse e-mail est déjà utilisée."
+msgstr "This email address is already in use."
+
+msgid "Votre compte est créé. Consultez votre e-mail pour confirmer votre adresse."
+msgstr "Your account has been created. Check your email to confirm your address."
+
+msgid "Le compte est créé, mais l’e-mail de confirmation n’a pas pu être envoyé. Vérifiez la configuration e-mail puis réessayez."
+msgstr "Your account was created, but the confirmation email could not be sent. Check the email configuration and try again."
+
+msgid "Trop de tentatives. Réessayez dans quelques minutes."
+msgstr "Too many attempts. Please try again in a few minutes."
+
+msgid "Adresse e-mail ou mot de passe invalide."
+msgstr "Invalid email address or password."
+
+msgid "Ce compte est désactivé. Contactez l’assistance."
+msgstr "This account is disabled. Contact support."
+
+msgid "Confirmez votre adresse e-mail avant de vous connecter. Un nouveau lien vient de vous être envoyé."
+msgstr "Confirm your email address before logging in. A new link has been sent."
+
+msgid "Votre adresse e-mail n’est pas encore confirmée et le message n’a pas pu être envoyé."
+msgstr "Your email address is not confirmed and we could not send the confirmation message."
+
+msgid "Vous êtes déconnecté."
+msgstr "You have been logged out."
+
+msgid "Ce lien de confirmation est invalide ou a expiré."
+msgstr "This confirmation link is invalid or has expired."
+
+msgid "Cette adresse e-mail est déjà confirmée."
+msgstr "This email address has already been confirmed."
+
+msgid "Votre adresse e-mail est confirmée. Vous pouvez vous connecter."
+msgstr "Your email address is confirmed. You can now log in."
+
+msgid "Si cette adresse correspond à un compte, un lien de réinitialisation va être envoyé."
+msgstr "If this address matches an account, a password reset link will be sent."
+
+msgid "Le message n’a pas pu être envoyé. Réessayez plus tard ou contactez l’assistance."
+msgstr "The message could not be sent. Try again later or contact support."
+
+msgid "Ce lien de réinitialisation est invalide ou a expiré."
+msgstr "This password reset link is invalid or has expired."
+
+msgid "Votre mot de passe a été modifié. Vous pouvez vous connecter."
+msgstr "Your password has been changed. You can now log in."
+
+msgid "Vos préférences ont été enregistrées."
+msgstr "Your preferences have been saved."
+
+msgid "Le mot de passe actuel est incorrect."
+msgstr "The current password is incorrect."
+
+msgid "Votre mot de passe a été modifié."
+msgstr "Your password has been changed."
+
+msgid "Le mot de passe est incorrect."
+msgstr "The password is incorrect."
+
+msgid "Votre compte et ses données ont été supprimés."
+msgstr "Your account and its data have been deleted."
+
+msgid "Confirmez votre adresse e-mail — Cauris"
+msgstr "Confirm your email address — Cauris"
+
+msgid "Réinitialisez votre mot de passe — Cauris"
+msgstr "Reset your password — Cauris"
+
+msgid "confirmer votre adresse e-mail"
+msgstr "confirm your email address"
+
+msgid "réinitialiser votre mot de passe"
+msgstr "reset your password"
+
+msgid "Bonjour %(username)s,\n\nUtilisez le lien suivant pour %(action)s :\n%(link)s\n\nCe lien expire dans %(minutes)s minutes."
+msgstr "Hello %(username)s,\n\nUse the following link to %(action)s:\n%(link)s\n\nThis link expires in %(minutes)s minutes."
+
+msgid "Finance personnelle"
+msgstr "Personal finance"
+
+msgid "Gagnez le contrôle de vos finances, même en déplacement."
+msgstr "Take control of your finances, wherever you are."
+
+msgid "Cauris centralise vos revenus, comptes, budgets, dettes et objectifs d'épargne dans une appli pensée pour l'Afrique centrale et de l'Ouest."
+msgstr "Cauris brings together your income, accounts, budgets, debts and savings goals in an app designed for Central and West Africa."
+
+msgid "FCFA gérés"
+msgstr "FCFA managed"
+
+msgid "Disponibilité"
+msgstr "Uptime"
+
+msgid "Multilingue"
+msgstr "Multilingual"
+
+msgid "Solde total"
+msgstr "Total balance"
+
+msgid "Revenus du mois"
+msgstr "Income this month"
+
+msgid "Dépenses"
+msgstr "Expenses"
+
+msgid "Objectif épargne"
+msgstr "Savings goal"
+
+msgid "Page introuvable"
+msgstr "Page not found"
+
+msgid "Erreur 404"
+msgstr "Error 404"
+
+msgid "Cette page n'existe pas."
+msgstr "This page does not exist."
+
+msgid "La ressource demandée ne fait pas partie de Cauris."
+msgstr "The requested resource is not part of Cauris."
+
+msgid "Erreur serveur"
+msgstr "Server error"
+
+msgid "Erreur 500"
+msgstr "Error 500"
+
+msgid "Une erreur est survenue."
+msgstr "Something went wrong."
+
+msgid "Une erreur interne est survenue sur le serveur. Réessayez plus tard."
+msgstr "An internal server error occurred. Please try again later."
+
+msgid "Ce champ est obligatoire."
+msgstr "This field is required."
+
+msgid "Le nom ne peut dépasser 80 caractères."
+msgstr "The name cannot exceed 80 characters."
+
+msgid "Saisissez une adresse e-mail valide."
+msgstr "Enter a valid email address."
+
+msgid "L’adresse e-mail est trop longue."
+msgstr "The email address is too long."
+
+msgid "Le mot de passe doit compter entre 12 et 128 caractères."
+msgstr "The password must be between 12 and 128 characters long."

@@ -1,8 +1,12 @@
-from datetime import datetime
+from datetime import datetime, timezone
 
 from flask_login import UserMixin
 
 from app.extensions import db
+
+
+def _utcnow_naive() -> datetime:
+    return datetime.now(timezone.utc).replace(tzinfo=None)
 
 
 class User(db.Model, UserMixin):
@@ -18,15 +22,18 @@ class User(db.Model, UserMixin):
     is_active = db.Column(db.Boolean, nullable=False, default=True)
     email_confirmed = db.Column(db.Boolean, nullable=False, default=False)
     totp_secret = db.Column(db.String(64), nullable=True)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
+    failed_login_attempts = db.Column(db.Integer, nullable=False, default=0, server_default="0")
+    login_locked_until = db.Column(db.DateTime, nullable=True)
+    created_at = db.Column(db.DateTime, default=_utcnow_naive, nullable=False)
 
     accounts = db.relationship("Account", back_populates="user", cascade="all, delete-orphan")
-    categories = db.relationship("Category", back_populates="user")
-    transactions = db.relationship("Transaction", back_populates="user")
-    budgets = db.relationship("Budget", back_populates="user")
-    goals = db.relationship("Goal", back_populates="user")
-    debts = db.relationship("Debt", back_populates="user")
-    audit_logs = db.relationship("AuditLog", back_populates="user")
+    categories = db.relationship("Category", back_populates="user", cascade="all, delete-orphan")
+    transactions = db.relationship("Transaction", back_populates="user", cascade="all, delete-orphan")
+    recurring_rules = db.relationship("RecurringRule", back_populates="user", cascade="all, delete-orphan")
+    budgets = db.relationship("Budget", back_populates="user", cascade="all, delete-orphan")
+    goals = db.relationship("Goal", back_populates="user", cascade="all, delete-orphan")
+    debts = db.relationship("Debt", back_populates="user", cascade="all, delete-orphan")
+    audit_logs = db.relationship("AuditLog", back_populates="user", cascade="all, delete-orphan")
 
 
 class Currency(db.Model):
@@ -69,7 +76,9 @@ class Account(db.Model):
 
     user = db.relationship("User", back_populates="accounts")
     currency = db.relationship("Currency", back_populates="accounts")
-    transactions = db.relationship("Transaction", back_populates="account")
+    transactions = db.relationship(
+        "Transaction", back_populates="account", cascade="all, delete-orphan"
+    )
 
 
 class Category(db.Model):
@@ -86,7 +95,9 @@ class Category(db.Model):
 
     user = db.relationship("User", back_populates="categories")
     parent = db.relationship("Category", remote_side="Category.id", backref="children")
-    transactions = db.relationship("Transaction", back_populates="category")
+    transactions = db.relationship(
+        "Transaction", back_populates="category", cascade="all, delete-orphan"
+    )
     budgets = db.relationship("Budget", back_populates="category")
 
 
@@ -101,6 +112,7 @@ class RecurringRule(db.Model):
     end_date = db.Column(db.DateTime, nullable=True)
     description = db.Column(db.Text, nullable=True)
 
+    user = db.relationship("User", back_populates="recurring_rules")
     transactions = db.relationship("Transaction", backref="recurring_rule")
 
 
@@ -116,7 +128,7 @@ class Transaction(db.Model):
     currency_code = db.Column(db.String(10), nullable=False)
     fx_rate_to_base = db.Column(db.Numeric(20, 10), nullable=False)
     amount_in_base = db.Column(db.Integer, nullable=False)
-    date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    date = db.Column(db.DateTime, nullable=False, default=_utcnow_naive)
     note = db.Column(db.Text, nullable=True)
     tags = db.Column(db.Text, nullable=True)
     transfer_group_id = db.Column(db.String(80), nullable=True)
@@ -155,6 +167,7 @@ class Goal(db.Model):
     linked_account_id = db.Column(db.Integer, db.ForeignKey("accounts.id"), nullable=True)
 
     user = db.relationship("User", back_populates="goals")
+    linked_account = db.relationship("Account")
 
 
 class Debt(db.Model):
@@ -178,7 +191,7 @@ class DebtPayment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     debt_id = db.Column(db.Integer, db.ForeignKey("debts.id"), nullable=False)
     amount = db.Column(db.Integer, nullable=False)
-    paid_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    paid_at = db.Column(db.DateTime, nullable=False, default=_utcnow_naive)
     note = db.Column(db.Text, nullable=True)
 
     debt = db.relationship("Debt", back_populates="payments")
@@ -190,7 +203,7 @@ class AuditLog(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     action = db.Column(db.String(160), nullable=False)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
+    created_at = db.Column(db.DateTime, default=_utcnow_naive, nullable=False)
     ip_address = db.Column(db.String(45), nullable=True)
 
     user = db.relationship("User", back_populates="audit_logs")

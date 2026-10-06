@@ -11,6 +11,8 @@ cauris/
 │   ├── main.py
 │   ├── models/
 │   ├── auth/
+│   │   ├── forms.py
+│   │   └── services.py
 │   ├── accounts/
 │   ├── transactions/
 │   ├── budgets/
@@ -35,27 +37,33 @@ cauris/
 
 ## Dépendances
 
-La liste est exposée dans [requirements.txt](requirements.txt). Elle comprend Flask, Flask-SQLAlchemy, Flask-Migrate, Flask-Login, Flask-WTF, Flask-Mail, Flask-Babel, APScheduler, sqlite et outils pour les exports Excel/PDF.
+La liste est exposée dans [requirements.txt](requirements.txt). Elle comprend Flask, Flask-SQLAlchemy, Flask-Migrate, Flask-Login, Flask-WTF, Flask-Mail, Flask-Babel, APScheduler, les pilotes SQLite/PostgreSQL et les outils pour les exports Excel/PDF.
 
 ## Lancement local
 
 1. Créer un environnement virtuel : `python -m venv .venv`
 2. Activer l'environnement : `.venv\Scripts\Activate.ps1`
-3. Installer les dépendances : `pip install -r requirements.txt`
+3. Installer les dépendances : `python -m pip install -r requirements.txt`
 4. Copier le fichier environnement : `Copy-Item .env.example .env`
-5. Lancer le serveur : `python run.py`
+5. Appliquer les migrations : `python -m flask db upgrade`
+6. Lancer le serveur : `python run.py`
 
 L'application est alors accessible sur http://127.0.0.1:5000.
 
-## Étape 1 réalisée
+## Étapes réalisées
 
-- Structure applicative Flask factory + blueprints
-- Support multi-devise et multilingue par défaut
-- Modèles SQLAlchemy complets pour les comptes, transactions, budgets, objectifs, dettes, devises, taux de change et journal
-- Données de base initiales (devises + catégories système)
-- Migrations Flask-Migrate préparées
-- Design system et base de Tailwind / HTMX / Alpine
-- Page d'accueil de démonstration
+- **Étape 1** : structure Flask factory + blueprints, configuration, modèles, données initiales, migrations et base du design system.
+- **Étape 2** : inscription avec confirmation d’adresse e-mail, connexion/déconnexion, limite de tentatives, réinitialisation par lien signé et expirant, profil (langue, devise, thème), changement de mot de passe et suppression confirmée du compte.
+
+Les mots de passe sont hachés avec Argon2. Les comptes non confirmés ne peuvent pas se connecter. Les erreurs d’envoi de courrier sont journalisées côté serveur et affichées clairement à l’utilisateur; le compte créé reste disponible pour une nouvelle tentative d’envoi à la connexion.
+
+## Configuration des e-mails et sécurité
+
+En local, configurez `MAIL_SERVER`, `MAIL_PORT`, `MAIL_USERNAME`, `MAIL_PASSWORD` et les options TLS dans `.env` pour utiliser un serveur SMTP de test ou votre fournisseur de messagerie. Si `SECRET_KEY` reste vide, le développement génère une clé temporaire à chaque processus; définissez-en une stable pour conserver les sessions après un redémarrage. Générez-la avec `python -c "import secrets; print(secrets.token_hex(32))"`. Les liens de confirmation et de réinitialisation expirent après `SECURITY_TOKEN_MAX_AGE` secondes (1 heure par défaut). En production, fournissez une `SECRET_KEY` forte et utilisez HTTPS; les cookies de session y sont marqués `Secure`.
+
+## Tests
+
+Lancez la suite avec `python -m pytest -q`. Les tests d’authentification utilisent une base SQLite en mémoire et n’envoient pas de vrais e-mails.
 
 ## Remarques de conception
 
