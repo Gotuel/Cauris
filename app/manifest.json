@@ -1,0 +1,10 @@
+{
+  "name": "Cauris",
+  "short_name": "Cauris",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#0f172a",
+  "description": "Gestion monétaire personnelle pour les marchés africains.",
+  "icons": []
+}

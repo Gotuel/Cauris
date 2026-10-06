@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="{{ get_locale() }}" class="h-full bg-slate-100 text-slate-900">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0f172a">
+    <title>{% block title %}Cauris{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+    <script src="{{ url_for('static', filename='js/app.js') }}" defer></script>
+  </head>
+  <body class="min-h-full antialiased bg-slate-100 text-slate-800">
+    <div class="min-h-screen">
+      <header class="border-b border-slate-200 bg-white/80 backdrop-blur-sm">
+        <nav class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+          <a href="{{ url_for('main.index') }}" class="flex items-center gap-3">
+            <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-500 to-indigo-600 text-lg font-bold text-white shadow-lg">C</span>
+            <span class="text-xl font-semibold tracking-tight text-slate-900">Cauris</span>
+          </a>
+          <div class="hidden items-center gap-6 md:flex">
+            <a href="#" class="text-sm font-medium text-slate-600 transition hover:text-slate-900">Accueil</a>
+            <a href="#" class="text-sm font-medium text-slate-600 transition hover:text-slate-900">Comptes</a>
+            <a href="#" class="text-sm font-medium text-slate-600 transition hover:text-slate-900">Transactions</a>
+            <a href="#" class="text-sm font-medium text-slate-600 transition hover:text-slate-900">Budgets</a>
+          </div>
+          <button class="rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-sm font-medium text-slate-700 shadow-sm transition hover:border-cyan-500 hover:text-cyan-700">
+            Connexion
+          </button>
+        </nav>
+      </header>
+
+      <main class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+        {% block content %}{% endblock %}
+      </main>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,56 @@
+:root {
+  --cauris-bg: #f8fafc;
+  --cauris-surface: #ffffff;
+  --cauris-text: #0f172a;
+  --cauris-border: #e2e8f0;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--cauris-bg);
+  color: var(--cauris-text);
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+a { text-decoration: none; }
+
+.card {
+  background: var(--cauris-surface);
+  border: 1px solid var(--cauris-border);
+  border-radius: 1rem;
+  box-shadow: 0 12px 28px -16px rgba(15, 23, 42, 0.25);
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.875rem;
+  background: #0f172a;
+  color: white;
+  font-weight: 700;
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.875rem;
+  border: 1px solid var(--cauris-border);
+  background: white;
+  color: #334155;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
